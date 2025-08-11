@@ -1,0 +1,80 @@
+//keyboardevents.js
+import React, { useState } from "react";
+
+function KeyboardEvents() {
+  const [keyDownMsg, setKeyDownMsg] = useState("Press any key");
+  const [keyUpMsg, setKeyUpMsg] = useState("Release any key");
+  const [keyPressMsg, setKeyPressMsg] = useState("Typing...");
+  const [focusMsg, setFocusMsg] = useState("Click inside the input");
+  const [blurMsg, setBlurMsg] = useState("Input lost focus");
+
+  const handleKeyDown = (e) => {
+    setKeyDownMsg(`Key Down: '${e.key}' (code: ${e.code})`);
+  };
+
+  const handleKeyUp = (e) => {
+    setKeyUpMsg(`Key Up: '${e.key}' (code: ${e.code})`);
+  };
+
+  const handleKeyPress = (e) => {
+    setKeyPressMsg(`Key Press: '${e.key}'`);
+  };
+
+  const handleFocus = () => {
+    setFocusMsg("Input is focused");
+  };
+
+  const handleBlur = () => {
+    setBlurMsg("Input lost focus");
+  };
+
+  const boxStyle = {
+    margin: "20px auto",
+    width: "350px",
+    padding: "15px",
+    borderRadius: "10px",
+    border: "2px solid #3b82f6",
+    fontSize: "16px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    userSelect: "none",
+  };
+
+  return (
+    <div style={boxStyle}>
+      <input
+        type="text"
+        placeholder="Type something here..."
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        onKeyPress={handleKeyPress}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={{ padding: "10px", fontSize: "16px", borderRadius: "6px" }}
+      />
+      <div>{keyDownMsg}</div>
+      <div>{keyUpMsg}</div>
+      <div>{keyPressMsg}</div>
+      <div>{focusMsg}</div>
+      <div>{blurMsg}</div>
+    </div>
+  );
+}
+
+export default KeyboardEvents;
+
+//App.js
+import React from "react";
+import KeyboardEvents from "./keyboardevents";  // imported
+
+function App() {
+  return (
+    <div>
+      <h1>Keyboard Events Demo</h1>
+      <KeyboardEvents />  {/* used here */}
+    </div>
+  );
+}
+
+export default App;
